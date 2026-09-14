@@ -106,7 +106,32 @@
     .stagger:nth-child(7){transition-delay:.56s}
 
     /* ---------- Hero ---------- */
-    #hero{min-height:calc(92vh - 64px);display:flex;align-items:center;padding:72px 0}
+    #hero{min-height:calc(92vh - 64px);display:flex;align-items:center;padding:72px 0;position:relative;overflow:hidden}
+    #hero::after{
+      content:'RD';position:absolute;right:-2%;bottom:-10%;
+      font-family:var(--serif);font-weight:600;font-style:italic;
+      font-size:clamp(12rem,30vw,26rem);line-height:.8;
+      color:transparent;-webkit-text-stroke:1.5px rgba(27,25,20,0.1);
+      pointer-events:none;user-select:none;
+    }
+    #hero .container{position:relative;z-index:1}
+    .section-head{position:relative}
+    .section-head::before{
+      content:attr(data-index);position:absolute;right:0;top:-38px;
+      font-family:var(--serif);font-weight:600;font-style:italic;
+      font-size:clamp(5rem,12vw,9.5rem);line-height:1;
+      color:transparent;-webkit-text-stroke:1.5px rgba(27,25,20,0.12);
+      pointer-events:none;user-select:none;
+    }
+    .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+    .ticker-track{display:flex;width:max-content;padding:15px 0;animation:ticker 40s linear infinite}
+    .ticker-track > *{margin-right:2.6rem;white-space:nowrap}
+    .ticker-track span{
+      font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;
+      text-transform:uppercase;color:var(--ink-soft);
+    }
+    .ticker-track i{color:var(--accent);font-style:normal;font-size:.7rem}
+    @keyframes ticker{to{transform:translateX(-50%)}}
     .hero-label{
       display:inline-flex;align-items:center;gap:10px;
       font-family:var(--mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;
@@ -170,14 +195,15 @@
       padding:8px 16px;border:1px solid var(--line);border-radius:2px;
       color:var(--ink);transition:border-color .3s,background .3s,transform .3s;
     }
-    .skill-tag:hover{border-color:var(--accent);background:var(--paper-deep);transform:translateY(-2px)}
+    .skill-tag:hover{border-color:var(--accent);background:var(--paper);transform:translateY(-2px)}
 
     /* ---------- Projects ---------- */
     .project{
       display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:2.5rem;
-      padding:44px 0;border-top:1px solid var(--line);
-      transition:background .35s;
+      padding:44px 26px;border-top:1px solid var(--line);
+      margin:0 -26px;transition:background .35s;
     }
+    .project:hover{background:rgba(27,25,20,0.04)}
     .project:last-child{border-bottom:1px solid var(--line)}
     .p-index{
       font-family:var(--mono);font-size:.75rem;letter-spacing:.2em;color:var(--accent);
@@ -228,33 +254,42 @@
     .achievement-card p{color:var(--ink-soft);font-size:.98rem;line-height:1.75}
 
     /* ---------- Contact ---------- */
-    #contact{text-align:left}
+    #contact{background:var(--ink);color:var(--paper);text-align:left}
+    #contact .s-index{color:#E8683B}
+    #contact .s-title,#contact .contact-title{color:var(--paper)}
+    #contact .s-sub,#contact .contact-text{color:rgba(250,246,238,0.72)}
+    #contact .section-head::before{-webkit-text-stroke-color:rgba(250,246,238,0.14)}
     .contact-title{
       font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,6.5vw,5rem);
       line-height:1.05;letter-spacing:-0.03em;margin-bottom:1.6rem;
     }
-    .contact-title em{font-style:italic;color:var(--accent);font-weight:400}
+    .contact-title em{font-style:italic;color:#E8683B;font-weight:400}
     .contact-text{font-size:1.12rem;color:var(--ink-soft);max-width:620px;line-height:1.8;margin-bottom:3rem}
     .contact-links{display:flex;gap:1rem;flex-wrap:wrap}
     .contact-link{
       display:inline-flex;align-items:center;gap:12px;padding:16px 26px;min-height:48px;
-      border:1px solid var(--line-strong);border-radius:2px;color:var(--ink);text-decoration:none;
+      border:1px solid rgba(250,246,238,0.35);border-radius:2px;color:var(--paper);text-decoration:none;
       font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
       transition:border-color .3s,background .3s,transform .3s;
     }
-    .contact-link:hover{border-color:var(--accent);background:var(--paper-deep);transform:translateY(-2px)}
+    .contact-link:hover{border-color:#E8683B;background:rgba(232,104,59,0.12);transform:translateY(-2px)}
     .contact-link svg{width:18px;height:18px;flex-shrink:0}
 
     /* ---------- Footer ---------- */
-    footer{border-top:1px solid var(--line);padding:2.2rem 0}
+    footer{background:var(--ink);border-top:1px solid rgba(250,246,238,0.18);padding:2.2rem 0}
     footer p{
-      font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;color:var(--ink-soft);
+      font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;color:rgba(250,246,238,0.6);
       display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
     }
 
+    /* ---------- Bands ---------- */
+    #skills,#achievements{background:var(--paper-deep)}
+
     /* ---------- Responsive ---------- */
     @media(max-width:900px){
-      .project{grid-template-columns:1fr;gap:1.2rem}
+      .section-head::before{display:none}
+      #hero::after{font-size:16rem;opacity:.7}
+      .project{grid-template-columns:1fr;gap:1.2rem;margin:0 -28px;padding:36px 28px}
       .p-tech{border-top:1px dashed var(--line);padding-top:1.2rem}
       .skill-row{grid-template-columns:1fr;gap:1rem}
       .xp{grid-template-columns:1fr;gap:.6rem;padding:36px 0}
@@ -265,6 +300,8 @@
     }
     @media(max-width:768px){
       .nav-toggle{display:flex}
+      #hero::after{display:none}
+      .project{margin:0 -20px;padding:36px 20px}
       .nav-links{
         position:fixed;top:64px;left:0;right:0;
         background:var(--paper);border-bottom:1px solid var(--line);
@@ -332,9 +369,16 @@
     </div>
   </section>
 
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Java</span><i>✳</i><span>Python</span><i>✳</i><span>JavaScript</span><i>✳</i><span>C</span><i>✳</i><span>SQL</span><i>✳</i><span>React</span><i>✳</i><span>Node.js</span><i>✳</i><span>Express.js</span><i>✳</i><span>PostgreSQL</span><i>✳</i><span>MongoDB</span><i>✳</i><span>AWS</span><i>✳</i><span>Azure</span><i>✳</i><span>Docker</span><i>✳</i><span>LLMs</span><i>✳</i><span>RAG</span><i>✳</i><span>ChromaDB</span><i>✳</i>
+      <span>Java</span><i>✳</i><span>Python</span><i>✳</i><span>JavaScript</span><i>✳</i><span>C</span><i>✳</i><span>SQL</span><i>✳</i><span>React</span><i>✳</i><span>Node.js</span><i>✳</i><span>Express.js</span><i>✳</i><span>PostgreSQL</span><i>✳</i><span>MongoDB</span><i>✳</i><span>AWS</span><i>✳</i><span>Azure</span><i>✳</i><span>Docker</span><i>✳</i><span>LLMs</span><i>✳</i><span>RAG</span><i>✳</i><span>ChromaDB</span><i>✳</i>
+    </div>
+  </div>
+
   <section id="about" aria-labelledby="about-title">
     <div class="container">
-      <header class="section-head reveal">
+      <header class="section-head reveal" data-index="01">
         <p class="s-index">01 / About</p>
         <h2 class="s-title" id="about-title">Transforming ideas into <em>intelligent</em> solutions</h2>
         <p class="s-sub">A third-year engineering student with a bias for shipping real software</p>
@@ -353,7 +397,7 @@
 
   <section id="skills" aria-labelledby="skills-title">
     <div class="container">
-      <header class="section-head reveal">
+      <header class="section-head reveal" data-index="02">
         <p class="s-index">02 / Skills</p>
         <h2 class="s-title" id="skills-title">Technical <em>arsenal</em></h2>
         <p class="s-sub">Versatile skill set across the full development stack</p>
@@ -408,7 +452,7 @@
 
   <section id="projects" aria-labelledby="projects-title">
     <div class="container">
-      <header class="section-head reveal">
+      <header class="section-head reveal" data-index="03">
         <p class="s-index">03 / Projects</p>
         <h2 class="s-title" id="projects-title">Featured <em>projects</em></h2>
         <p class="s-sub">Real-world solutions with measurable impact</p>
@@ -516,7 +560,7 @@
 
   <section id="experience" aria-labelledby="experience-title">
     <div class="container">
-      <header class="section-head reveal">
+      <header class="section-head reveal" data-index="04">
         <p class="s-index">04 / Experience</p>
         <h2 class="s-title" id="experience-title">Experience</h2>
         <p class="s-sub">Building expertise through hands-on development</p>
@@ -550,7 +594,7 @@
 
   <section id="achievements" aria-labelledby="achievements-title">
     <div class="container">
-      <header class="section-head reveal">
+      <header class="section-head reveal" data-index="05">
         <p class="s-index">05 / Achievements</p>
         <h2 class="s-title" id="achievements-title">Achievements</h2>
         <p class="s-sub">Recognition for technical excellence and leadership</p>
@@ -582,7 +626,7 @@
 
   <section id="contact" aria-labelledby="contact-title">
     <div class="container">
-      <header class="section-head reveal">
+      <header class="section-head reveal" data-index="06">
         <p class="s-index">06 / Contact</p>
         <h2 class="contact-title" id="contact-title">Let's build something <em>great</em></h2>
         <p class="s-sub">Open to internships, collaborations, and full-time opportunities</p>
